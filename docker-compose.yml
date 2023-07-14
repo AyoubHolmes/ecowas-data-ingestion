@@ -6,22 +6,33 @@ services:
     container_name: ecowas_pg
     restart: always
     ports:
-      - '5430:5432'
+      - '5432:5432'
     volumes:
-      - ecowas_pg:/var/lib/postgresql/data
+      - data:/var/lib/postgresql/data:rw
     env_file: '.env'
-  redis:
-    image: redis:latest
-    container_name: monitor_redis
+    networks:
+      - ecowas_network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
     restart: always
     ports:
-      - '6379:6379'
+      - "5050:5050"
     env_file: '.env'
-    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
-  adminer:
-      image: adminer
-      ports:
-        - "8080:8080"
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    links:
+      - postgres:postgres
+    networks:
+      - ecowas_network
+    depends_on:
+      - postgres
 
 volumes:
-  ecowas_pg:
+  data:
+  pgadmin:
+  
+networks:
+  ecowas_network:
+    driver: bridge

@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: ecowas_pg
+    restart: always
+    ports:
+      - '5430:5432'
+    volumes:
+      - ecowas_pg:/var/lib/postgresql/data
+    env_file: '.env'
+  redis:
+    image: redis:latest
+    container_name: monitor_redis
+    restart: always
+    ports:
+      - '6379:6379'
+    env_file: '.env'
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
+  adminer:
+      image: adminer
+      ports:
+        - "8080:8080"
+
+volumes:
+  ecowas_pg:

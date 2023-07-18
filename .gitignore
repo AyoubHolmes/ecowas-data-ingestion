@@ -1,1 +1,7 @@
 venv/
+# remove pycache from every subfolder
+__pycache__
+# remove all .pyc files
+*.pyc
+# remove all .pyo files
+*.pyo

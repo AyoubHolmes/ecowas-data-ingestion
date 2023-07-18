@@ -1,0 +1,31 @@
+import os
+from dotenv import load_dotenv
+
+
+class ConfigParser:
+    REQUIRED_VARIABLES = [
+        "DATABASE_SYSTEM",
+        "POSTGRES_DB",
+        "POSTGRES_USER",
+        "POSTGRES_PASSWORD",
+        "POSTGRES_HOST",
+        "POSTGRES_PORT",
+    ]
+    
+    def __init__(self):
+        # Load environment variables from .env file
+        load_dotenv()
+
+        # Read and validate configuration values
+        self.validate_variables()
+
+    def validate_variables(self):
+        for variable in self.REQUIRED_VARIABLES:
+            value = self.get_env_variable(variable)
+            setattr(self, variable, value)
+
+    def get_env_variable(self, variable_name):
+        value = os.getenv(variable_name)
+        if value is None:
+            raise ValueError(f"Environment variable {variable_name} is not set.")
+        return value

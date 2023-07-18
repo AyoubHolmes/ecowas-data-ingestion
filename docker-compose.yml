@@ -2,7 +2,7 @@ version: '3'
 
 services:
   postgres:
-    image: postgres:latest
+    image: postgres:15.3-alpine3.18
     container_name: ecowas_pg
     restart: always
     ports:
@@ -13,17 +13,15 @@ services:
     networks:
       - ecowas_network
 
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: pgadmin
+  adminer:
+    image: adminer
+    container_name: ecowas_adminer
     restart: always
     ports:
-      - "5050:5050"
+      - 8080:8080
     env_file: '.env'
     volumes:
-      - pgadmin:/var/lib/pgadmin
-    links:
-      - postgres:postgres
+      - pgadmin:/var/lib/pgadmin:rw
     networks:
       - ecowas_network
     depends_on:

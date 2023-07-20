@@ -1,6 +1,6 @@
 import psycopg2
 from psycopg2 import OperationalError
-from ecowas.custom_logger import CustomLogger
+from package.custom_logger import CustomLogger
 
 
 logging = CustomLogger("POSTGRES MODEL")
@@ -39,6 +39,7 @@ class PostgresModel:
                 f"An error occurred while connecting to the database: {str(e)}"
             )
 
+    
     def _create_db_if_not_exists(self):
         cursor = self.connection.cursor()
         cursor.execute(f"SELECT 1 FROM pg_catalog.pg_database WHERE datname = '{self.config.POSTGRES_DB}';")
@@ -50,6 +51,8 @@ class PostgresModel:
         else:
             logging.info(f"Database {self.config.POSTGRES_DB} already exists")
         cursor.close()
+
+    
 
     
     

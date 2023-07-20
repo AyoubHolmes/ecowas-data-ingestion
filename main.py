@@ -1,4 +1,4 @@
-from ecowas import EcowasDatabase
+from package import Package
 from config import ConfigParser
 
 def main():
@@ -6,7 +6,7 @@ def main():
     config = ConfigParser()
     
     # Initialize the EcoWAS
-    ecowas = EcowasDatabase(config)
+    ecowas = Package(config)
     ecowas.create_connection()
 
 if __name__ == "__main__":

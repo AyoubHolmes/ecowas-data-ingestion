@@ -6,5 +6,5 @@ __pycache__
 # remove all .pyo files
 *.pyo
 .idea/
-!/data_backend/script.sql
-!/data_backend/example/
+/data_backend/script.sql
+/data_backend/example/

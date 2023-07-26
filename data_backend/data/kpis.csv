@@ -1,23 +1,23 @@
-id,label,ParentId
-1,"Health and nutrition",
-2,"Fertility rate",1
-3,"Maternal mortality rate",1
-4,"Under-5 mortality rate",1
-5,"Under-5 stunting rate",1
-6,"Life expectancy at birth",1
-7,"Government health exp.",1
-8,"Child Marriage",1
-9,"Education", skills and labor participation",
-10,"Government Education exp.",9
-11,"Ratio of teachers",9
-12,"Children out of school",9
-13,"Mean years of schooling",9
-14,"Harmonized test scores",9
-15,"Youth NEET",9
-16,"Youth literacy rate",9
-17,"Number of citations",9
-18,"Entrepreneurship", financial inclusion and digital economy",
-19,"Penetration rate fin services",18
-20,"Individuals using Internet",18
-21,"New business density",18
-22,"Integrated index (average per theme)",
+Id,label,ParentId
+1,Health and nutrition,
+2,Fertility rate,1
+3,Maternal mortality rate,1
+4,Under-5 mortality rate,1
+5,Under-5 stunting rate,1
+6,Life expectancy at birth,1
+7,Government health exp.,1
+8,Child Marriage,1
+9,"Education, skills and labor participation",
+10,Government Education exp.,9
+11,Ratio of teachers,9
+12,Children out of school,9
+13,Mean years of schooling,9
+14,Harmonized test scores,9
+15,Youth NEET,9
+16,Youth literacy rate,9
+17,Number of citations,9
+18,"Entrepreneurship, financial inclusion and digital economy",
+19,Penetration rate fin services,18
+20,Individuals using Internet,18
+21,New business density,18
+22,Integrated index (average per theme),

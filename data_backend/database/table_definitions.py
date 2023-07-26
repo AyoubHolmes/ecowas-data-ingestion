@@ -10,6 +10,7 @@ class Country(Base):
     id = Column(Integer, primary_key=True)
     label = Column(String, nullable=False)
 
+
 class Kpi(Base):
     __tablename__ = "kpi"
 

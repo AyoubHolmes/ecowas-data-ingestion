@@ -1,6 +1,7 @@
+from sqlalchemy import create_engine, text
+
 from data_backend.custom_logger import CustomLogger
-from sqlalchemy import create_engine, inspect
-from data_backend.package.table_definitions import Base, Country, Kpi, KpiValue
+from data_backend.database.table_definitions import Base
 
 logging = CustomLogger("POSTGRES MODEL")
 
@@ -9,7 +10,6 @@ class PostgresModel:
     def __init__(self, config):
         self.config = config
         self.engine = None
-        self.table_classes = [Country, Kpi, KpiValue]
 
     def connect(self):
         db_connection_string = (
@@ -29,25 +29,27 @@ class PostgresModel:
             logging.error("Exiting...")
             exit(1)
 
-    def create_tables_if_not_exists(self):
+    def re_create_tables(self, tables: list):
         try:
-            if not all(self._table_exists(t) for t in self.table_classes):
-                Base.metadata.create_all(self.engine, checkfirst=True)
-                logging.info("Created tables successfully! :)")
-            else:
-                logging.info("Tables already exist. Moving on...")
+            for t in tables:
+                self.delete_table(t)
+            Base.metadata.create_all(self.engine, checkfirst=True)
+            logging.info("Created tables successfully!")
         except Exception as e:
             logging.error(f"An error occurred while creating tables: {str(e)}")
 
-    def _table_exists(self, table_cls):
-        inspector = inspect(self.engine)
-        return inspector.has_table(table_cls.__tablename__)
-    
-    def load_csv_to_pg(self, csv, table_name, if_exists="fail", index=False):
+    def delete_table(self, table):
         try:
-            csv.to_sql(table_name, self.engine, if_exists=if_exists, index=index)
-            logging.info(f"Table {table_name} loaded successfully!")
+            if self.table_exists(table):
+                table.__table__.drop(self.engine, checkfirst=True)
+                logging.info(f"Deleted table {table.__tablename__}")
+            else:
+                logging.info(f"Cannot Delete Table {table.__tablename__} it does not exist!")
         except Exception as e:
-            logging.error(f"Failed to load table {table_name}: {e}")
-            logging.error("Exiting...")
-            exit(1)
+            logging.error(f"An error occurred while deleting tables: {str(e)}")
+
+    def table_exists(self, table_cls):
+        with self.engine.connect() as conn:
+            result = conn.execute(
+                text(f"SELECT EXISTS (SELECT 1 FROM pg_tables WHERE tablename = '{table_cls.__tablename__}')"))
+            return result.scalar()

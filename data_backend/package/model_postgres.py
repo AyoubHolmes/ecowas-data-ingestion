@@ -1,6 +1,6 @@
 import psycopg2
 from psycopg2 import OperationalError
-from package.custom_logger import CustomLogger
+from data_backend.custom_logger import CustomLogger
 
 
 logging = CustomLogger("POSTGRES MODEL")

@@ -1,4 +1,4 @@
-from package.custom_logger import CustomLogger
+from data_backend.custom_logger import CustomLogger
 
 
 logging = CustomLogger("database")
@@ -19,7 +19,7 @@ class Package:
 
     def get_dbs_model(self, database_system):
         if database_system == "postgres":
-            from package.model_postgres import PostgresModel
+            from data_backend.package.model_postgres import PostgresModel
             model = PostgresModel
         else:
             raise ValueError(

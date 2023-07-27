@@ -29,10 +29,8 @@ class DataProcessor:
             logging.info(f"Validating source columns for {source['name']}...")
             # Get the header columns
             columns = source['df'].columns.tolist()
-            logging.info(f"Columns in File {source['name']}: {columns}")
             # Get the destination table columns
             table_columns = self.table_definitions.metadata.tables[source['destination_table']].columns.keys()
-            logging.info(f"Columns in Table {source['destination_table']}: {table_columns}")
             # Check if all the columns in the source file are in the destination table
             if not all(elem in table_columns for elem in columns):
                 raise ValueError(

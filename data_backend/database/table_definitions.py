@@ -16,12 +16,12 @@ class Kpi(Base):
 
     id = Column(Integer, primary_key=True)
     label = Column(String, nullable=False)
-    parentId = Column(
+    parent_id = Column(
         Integer,
         ForeignKey(
             "kpi.id", onupdate="CASCADE", ondelete="CASCADE", name="fk_kpi_parent"
         ),
-        nullable=False,
+        nullable=True,
     )
 
 
@@ -31,14 +31,15 @@ class KpiValue(Base):
     id = Column(
         Integer, Sequence("kpi_value_id_seq", start=1, increment=1), primary_key=True
     )
-    kpiId = Column(
+
+    kpi_id = Column(
         Integer,
         ForeignKey(
             "kpi.id", onupdate="CASCADE", ondelete="CASCADE", name="fk_kpi_value_kpi"
         ),
         nullable=False,
     )
-    countryId = Column(
+    country_id = Column(
         Integer,
         ForeignKey(
             "country.id",
@@ -48,11 +49,13 @@ class KpiValue(Base):
         ),
         nullable=False,
     )
-    baseline = Column(Float, nullable=False)
-    latestValue = Column(Float, nullable=False)
-    targetLatestValue = Column(Float, nullable=False)
-    target2030 = Column(Float, nullable=False)
-    progressMade = Column(Float, nullable=False)
-    distanceToTarget = Column(Float, nullable=False)
-    directionGoodPerformance = Column(Float, nullable=False)
-    ranking = Column(Float, nullable=False)
+    baseline = Column(Float, nullable=True)
+    latest_value = Column(Float, nullable=True)
+    target_latest_value = Column(Float, nullable=True)
+    target2030 = Column(Float, nullable=True)
+    progress_made = Column(Float, nullable=True)
+    distance_to_target = Column(Float, nullable=True)
+    direction_good_performance = Column(Float, nullable=True)
+    ranking = Column(Float, nullable=True)
+    baseline_normalized = Column(Float, nullable=True)
+    latest_data_normalized = Column(Float, nullable=True)

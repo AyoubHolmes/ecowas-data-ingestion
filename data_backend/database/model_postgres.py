@@ -1,14 +1,15 @@
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine, text, select
+from sqlalchemy.orm import declarative_base
 
 from data_backend.custom_logger import CustomLogger
-from data_backend.database.table_definitions import Base
 
 logging = CustomLogger("POSTGRES MODEL")
 
 
 class PostgresModel:
-    def __init__(self, config):
+    def __init__(self, config, table_models: declarative_base()):
         self.config = config
+        self.base = table_models
         self.engine = None
 
     def connect(self):
@@ -29,12 +30,20 @@ class PostgresModel:
             logging.error("Exiting...")
             exit(1)
 
-    def re_create_tables(self, tables: list):
+    def get_table_columns(self, table):
+        try:
+            with self.engine.connect() as conn:
+                result = conn.execute(text(f"SELECT * FROM {table.__tablename__} LIMIT 0"))
+                return result.keys()
+        except Exception as e:
+            logging.error(f"An error occurred while getting table columns: {str(e)}")
+
+    def re_create_table(self, tables: list):
         try:
             for t in tables:
                 self.delete_table(t)
-            Base.metadata.create_all(self.engine, checkfirst=True)
-            logging.info("Created tables successfully!")
+            self.base.metadata.create_all(self.engine, checkfirst=True)
+            logging.info(f"Created tables {[t.__tablename__ for t in tables]} successfully!")
         except Exception as e:
             logging.error(f"An error occurred while creating tables: {str(e)}")
 
@@ -53,3 +62,23 @@ class PostgresModel:
             result = conn.execute(
                 text(f"SELECT EXISTS (SELECT 1 FROM pg_tables WHERE tablename = '{table_cls.__tablename__}')"))
             return result.scalar()
+
+    def get_one(self, table_cls, **kwargs):
+        where_column_name = kwargs.get('where_column')
+        select_column_name = kwargs.get('select_column')
+        where_value = kwargs.get('where_value')
+
+        if not (where_column_name and select_column_name and where_value):
+            raise ValueError(
+                "All three parameters 'where_column', 'select_column', and 'where_value' must be specified.")
+
+        where_column = getattr(table_cls.c, where_column_name)
+        select_column = getattr(table_cls.c, select_column_name)
+
+        with self.engine.connect() as conn:
+            query = select(select_column).where(where_column == where_value)
+            result = conn.execute(query)
+            row = result.fetchone()
+            if row is None:
+                return None
+            return row[0]  # Access the first element in the row tuple

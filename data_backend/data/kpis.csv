@@ -20,4 +20,5 @@ id,label,parent_id
 19,Penetration rate fin services,18
 20,Individuals using Internet,18
 21,New business density,18
-22,Integrated index (average per theme),
+22,Integrated index,
+23,HCD index

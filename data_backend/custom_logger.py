@@ -12,7 +12,7 @@ class CustomLogger(logging.Logger):
         self.setLevel(logging.INFO)
 
         formatter = logging.Formatter(
-            "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+            "%(asctime)s - Data_backend - %(name)s - %(levelname)s - %(message)s"
         )
 
         # log lower levels to stdout

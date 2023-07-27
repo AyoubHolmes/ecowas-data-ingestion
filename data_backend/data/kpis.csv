@@ -1,4 +1,4 @@
-Id,label,ParentId
+id,label,parent_id
 1,Health and nutrition,
 2,Fertility rate,1
 3,Maternal mortality rate,1

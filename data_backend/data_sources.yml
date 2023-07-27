@@ -1,0 +1,46 @@
+kpi_value:
+  TYPE: "XLSX"
+  PATH: "data/new_data.xlsx"
+  SHEET_NAME: "Data_table"
+  HEADER: 0
+  USECOLS: #[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14] #for using specific columns
+  SKIPROWS: 0
+  DESTINATION_TABLE: "kpi_value"
+  COLUMN_MAPPING: # File column name -> Corresponding column name in table
+    "Country": "country_id"
+    "KPI": "kpi_id"
+    "Ranking_based_on_latest_value": "ranking"
+    "Baseline": "baseline"
+    "Latest_value": "latest_value"
+    "Target_for_latest_value": "target_latest_value"
+    "Target_for_2030": "target2030"
+    "Progress_made": "progress_made"
+    "Distance_to_target": "distance_to_target"
+    "Direction_of_good_performance": "direction_good_performance"
+    "Baseline_Normalized": "baseline_normalized"
+    "Latest_data_Normalized": "latest_data_normalized"
+
+country:
+  TYPE: "CSV"
+  PATH: "data/country.csv"
+  HEADER: 0
+  USECOLS: #[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+  SKIPROWS: 0
+  DELIMITER: ","
+  DESTINATION_TABLE: "country"
+  COLUMN_MAPPING:
+    "id": "id"
+    "label": "label"
+
+kpi:
+  TYPE: "CSV"
+  PATH: "data/kpis.csv"
+  HEADER: 0
+  USECOLS: #[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+  SKIPROWS: 0
+  DELIMITER: ","
+  DESTINATION_TABLE: "kpi"
+  COLUMN_MAPPING:
+    "id": "id"
+    "label": "label"
+    "parent_id": "parent_id"

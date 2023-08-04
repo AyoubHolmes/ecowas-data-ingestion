@@ -40,6 +40,7 @@ def main():
     tasks.to_sql(country['destination_table'], country['df'], if_exists="append")
     tasks.to_sql(kpi['destination_table'], kpi['df'], if_exists="append")
     kpi_values['df'] = tasks.process_new_values_for_kpi_value(kpi_values)
+    kpi_values['df'] = tasks.distinct_values(kpi_values)
     tasks.to_sql(kpi_values['destination_table'], kpi_values['df'], if_exists="append", index=True, index_label="id")
 
 

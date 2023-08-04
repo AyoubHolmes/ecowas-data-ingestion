@@ -49,3 +49,8 @@ class Tasks:
         # get the value and cast to int it's the table id
         res = self.db.get_one(table_cls=kpi, select_column='id', where_column='label', where_value=kpi_name)
         return res
+
+    def distinct_values(self, source):
+        df = source['df']
+        df = df.drop_duplicates()
+        return df

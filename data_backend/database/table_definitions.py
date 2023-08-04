@@ -49,6 +49,7 @@ class KpiValue(Base):
         ),
         nullable=False,
     )
+    kpi_description = Column(String, nullable=True)
     baseline = Column(Float, nullable=True)
     latest_value = Column(Float, nullable=True)
     target_latest_value = Column(Float, nullable=True)
@@ -59,3 +60,5 @@ class KpiValue(Base):
     ranking = Column(Float, nullable=True)
     baseline_normalized = Column(Float, nullable=True)
     latest_data_normalized = Column(Float, nullable=True)
+    target_latest_value_normalized = Column(Float, nullable=True)
+    target2030_normalized = Column(Float, nullable=True)

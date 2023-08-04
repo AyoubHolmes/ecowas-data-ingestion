@@ -9,6 +9,7 @@ kpi_value:
   COLUMN_MAPPING: # File column name -> Corresponding column name in table
     "Country": "country_id"
     "KPI": "kpi_id"
+    "KPI_Description": "kpi_description"
     "Ranking_based_on_latest_value": "ranking"
     "Baseline": "baseline"
     "Latest_value": "latest_value"
@@ -19,6 +20,8 @@ kpi_value:
     "Direction_of_good_performance": "direction_good_performance"
     "Baseline_Normalized": "baseline_normalized"
     "Latest_data_Normalized": "latest_data_normalized"
+    "Target_for_latest_value_normalized": "target_latest_value_normalized"
+    "Target_for_2030_normalized": "target2030_normalized"
 
 country:
   TYPE: "CSV"

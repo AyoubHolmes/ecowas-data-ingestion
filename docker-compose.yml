@@ -1,12 +1,23 @@
 version: '3'
 
 services:
+  data_backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: data_backend
+    restart: on-failure
+    networks:
+      - ecowas_network
+    depends_on:
+      - postgres
+
   postgres:
     image: postgres:15.3-alpine3.18
     container_name: ecowas_pg
     restart: always
     ports:
-      - '5432:5432'
+      - "5432:5432"
     volumes:
       - data:/var/lib/postgresql/data:rw
     env_file: '.env'
@@ -18,7 +29,7 @@ services:
     container_name: ecowas_adminer
     restart: always
     ports:
-      - 8080:8080
+      - "8080:8080"
     env_file: '.env'
     volumes:
       - pgadmin:/var/lib/pgadmin:rw

@@ -1,6 +1,6 @@
 kpi_value:
   TYPE: "XLSX"
-  PATH: "data/new_data.xlsx"
+  PATH: "new_data.xlsx"
   SHEET_NAME: "Data_table"
   HEADER: 0
   USECOLS: #[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14] #for using specific columns
@@ -24,7 +24,7 @@ kpi_value:
 
 country:
   TYPE: "CSV"
-  PATH: "data/country.csv"
+  PATH: "data_backend/data/country.csv"
   HEADER: 0
   USECOLS: #[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
   SKIPROWS: 0
@@ -36,7 +36,7 @@ country:
 
 kpi:
   TYPE: "CSV"
-  PATH: "data/kpis.csv"
+  PATH: "data_backend/data/kpis.csv"
   HEADER: 0
   USECOLS: #[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
   SKIPROWS: 0

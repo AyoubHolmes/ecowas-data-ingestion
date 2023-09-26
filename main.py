@@ -15,7 +15,7 @@ def main():
     db = Database(env, table_definitions=Base)
     db.create_connection()
 
-    data_source_file_name = "data_sources.yml"
+    data_source_file_name = "data_backend/data_sources.yml"
     data_source = DataSourceConfigParser(data_source_file_name)
 
     # Initialize the data importation, Extraction Phase

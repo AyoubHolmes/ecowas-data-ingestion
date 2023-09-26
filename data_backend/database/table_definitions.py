@@ -24,6 +24,10 @@ class Kpi(Base):
         ),
         nullable=True,
     )
+    label_french = Column(String, nullable=True)
+    kpi_description_french = Column(String, nullable=True)
+    label_portuguese = Column(String, nullable=True)
+    kpi_description_portuguese = Column(String, nullable=True)
 
 
 class KpiValue(Base):

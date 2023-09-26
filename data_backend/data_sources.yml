@@ -47,3 +47,7 @@ kpi:
     "label": "label"
     "kpi_description": "kpi_description"
     "parent_id": "parent_id"
+    "label_french": "label_french"
+    "kpi_description_french": "kpi_description_french"
+    "label_portuguese": "label_portuguese"
+    "kpi_description_portuguese": "kpi_description_portuguese"
